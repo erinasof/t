@@ -37,6 +37,8 @@ public:
 	//+
 	int getVert(int n) { return (n - 1) / 3; }
 
+	int getHoriz(int n) { return 0; }
+
 	bool readPasswFile(string s) {
 		bool f1 = true, f2 = true;
 		try {
@@ -208,6 +210,11 @@ TEST(getVertTest, Test2) {
 TEST(getVertTest, Test3) {
 	XO P;
 	ASSERT_EQ(0, P.getVert(2));
+}
+
+TEST(getHorizTest, Test1) {
+	XO P;
+	ASSERT_EQ(0, P.getHoriz(1));
 }
 
 int _tmain(int argc, _TCHAR* argv[]){
