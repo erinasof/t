@@ -19,6 +19,29 @@ class XO {
 public:
 	vector<int> code;
 	int **field;
+
+	bool readPasswFile(string s) {
+		try {
+			ifstream ifs(s);
+			if (ifs.is_open()) {
+				int n;
+				ifs >> n;
+				int u;
+				for (int i = 0; i < n; i++) {
+					ifs >> u;
+					code.push_back(u);
+				}
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		catch (...) {
+			//что-то пошло не так
+			return 0;
+		}
+	}
 };
 
 class MyAcc {
@@ -33,6 +56,18 @@ public:
 	XO password;
 
 };
+
+TEST(readPasswFileTest, Test1) {
+	Prog p;
+	string s = "passw1.txt";
+	ofstream ofs(s);
+	if (ofs.is_open()) {
+		ofs << "5 1 2 4 5 7";
+	}
+	ofs.close();
+
+	ASSERT_TRUE(p.password.readPasswFile(s));
+}
 
 int _tmain(int argc, _TCHAR* argv[]){
 	::testing::InitGoogleTest(&argc, argv);
