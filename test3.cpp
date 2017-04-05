@@ -117,7 +117,7 @@ public:
 		int y = 0;
 		for (vector<MyAcc>::iterator r = accounts.begin(); r != accounts.end(); r++, y++)
 			cout << y + 1 << ")	" << r->myAccName << "	" << r->myPassword << endl;
-		return true;
+		return bool(y);
 	}
 
 	bool readListFile(string s) {
@@ -409,6 +409,11 @@ TEST(printAccountsTest, Test1) {
 	P.accounts.push_back(ma);
 
 	ASSERT_TRUE(P.printAccounts());
+}
+
+TEST(printAccountsTest, Test2) {
+	Prog P;
+	ASSERT_FALSE(P.printAccounts());
 }
 
 int _tmain(int argc, _TCHAR* argv[]){
