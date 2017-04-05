@@ -42,7 +42,7 @@ public:
 	bool isCorrectPlace(int u) {
 		int v = getVert(u);
 		int h = getHoriz(u);
-		if (field[v][h] == 2) return 0;
+		if (field[v][h] != 0) return 0;
 		return 1;
 	}
 
@@ -243,6 +243,12 @@ TEST(isCorrectPlaceTest, Test2) {
 	XO P;
 	P.field[P.getVert(3)][P.getHoriz(3)] = 2;
 	ASSERT_FALSE(P.isCorrectPlace(3));
+}
+
+TEST(isCorrectPlaceTest, Test3) {
+	XO P;
+	P.field[P.getVert(5)][P.getHoriz(5)] = 1;
+	ASSERT_FALSE(P.isCorrectPlace(5));
 }
 
 int _tmain(int argc, _TCHAR* argv[]){
