@@ -39,6 +39,10 @@ public:
 	//горизонтальная координата из номера
 	int getHoriz(int n) { return (n - 1) % 3; }
 
+	bool isCorrectCode() {
+		return false;
+	}
+
 	bool isCorrectPlace(int u) {
 		int v = getVert(u);
 		int h = getHoriz(u);
@@ -346,6 +350,17 @@ TEST(notEndTest, Test4) {
 	P.field[2][2] = 2;
 
 	ASSERT_EQ(0, P.notEndCycle());
+}
+
+TEST(isCorrectCodeTest, Test1) {
+	XO P;
+	//O O O
+	//  X
+	//X   X
+	P.field[0][0] = P.field[0][1] = P.field[0][2] = 2;
+	P.field[1][0] = P.field[2][1] = P.field[2][2] = 0;
+	P.field[2][0] = P.field[2][2] = P.field[1][1] = 1;
+	ASSERT_FALSE(P.isCorrectCode());
 }
 
 int _tmain(int argc, _TCHAR* argv[]){
