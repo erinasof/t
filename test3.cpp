@@ -50,6 +50,7 @@ public:
 	//+
 	bool notEndCycle() {
 		if (code.size() == 9) return false;
+		if (field[0][0] == field[0][1] && field[0][1] == field[0][2] && field[0][2]) return false;
 		return true;
 	}
 
@@ -302,6 +303,24 @@ TEST(notEndTest, Test2) {
 	P.field[2][2] = 1;
 
 	ASSERT_EQ(false, P.notEndCycle());
+}
+
+TEST(notEndTest, Test1) {
+	XO P;
+	//X X X
+	//O   O
+	//  O
+	P.field[0][0] = 1;
+	P.field[0][1] = 1;
+	P.field[0][2] = 1;
+	P.field[1][0] = 2;
+	P.field[1][1] = 0;
+	P.field[1][2] = 2;
+	P.field[2][0] = 0;
+	P.field[2][1] = 2;
+	P.field[2][2] = 0;
+
+	ASSERT_EQ(0, P.notEndCycle());
 }
 
 int _tmain(int argc, _TCHAR* argv[]){
