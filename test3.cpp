@@ -21,7 +21,7 @@ public:
 	int **field;
 
 	bool readPasswFile(string s) {
-		bool f1 = true;
+		bool f1 = true, f2 = true;
 		try {
 			ifstream ifs(s);
 			if (ifs.is_open()) {
@@ -31,9 +31,10 @@ public:
 				int u;
 				for (int i = 0; i < n; i++) {
 					ifs >> u;
+					if (u > 9 || u < 1) f2 = false;
 					code.push_back(u);
 				}
-				if (f1) return true;
+				if (f1 && f2) return true;
 				else return false;
 			}
 			else {
@@ -81,6 +82,19 @@ TEST(readPasswFileTest, Test2) {
 	}
 	ofs.close();
 	//на пустой файл реакция
+	ASSERT_FALSE(p.password.readPasswFile(s));
+}
+
+TEST(readPasswFileTest, Test3) {
+	Prog p;
+	string s = "passw1.txt";
+	ofstream ofs(s);
+	if (ofs.is_open()) {
+		//запись числа без ничего
+		ofs << "6 -10 -5 100 11 4 5";
+	}
+	ofs.close();
+
 	ASSERT_FALSE(p.password.readPasswFile(s));
 }
 
