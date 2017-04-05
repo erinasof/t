@@ -60,7 +60,7 @@ public:
 	XO password;
 
 	bool readListFile(string s) {
-		bool f1 = true;
+		bool f1 = true, f2 = true;
 		try {
 			ifstream ifs(s);
 			if (ifs.is_open()) {
@@ -71,9 +71,11 @@ public:
 					MyAcc a;
 					ifs >> a.myAccName;
 					ifs >> a.myPassword;
-					accounts.push_back(a);
+					if (a.myAccName == "" || a.myPassword == "")
+						f2 = false;
+					else accounts.push_back(a);
 				}
-				if (f1) return true;
+				if (f1 && f2) return true;
 				else return false;
 			}
 			else {
@@ -142,6 +144,19 @@ TEST(readListFileTest, Test2) {
 	ofstream ofs(s);
 	if (ofs.is_open()) {
 		ofs << "";
+	}
+	ofs.close();
+
+	ASSERT_FALSE(p.readListFile(s));
+}
+
+TEST(readListFileTest, Test3) {
+	Prog p;
+	string s = "mylist1.txt";
+	ofstream ofs(s);
+	if (ofs.is_open()) {
+		//запись числа без ничего
+		ofs << "100 q q";
 	}
 	ofs.close();
 
