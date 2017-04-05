@@ -51,6 +51,13 @@ public:
 	bool notEndCycle() {
 		if (code.size() == 9) return false;
 		if (field[0][0] == field[0][1] && field[0][1] == field[0][2] && field[0][2]) return false;
+		if (field[1][0] == field[1][1] && field[1][1] == field[1][2] && field[1][2]) return false;
+		if (field[2][0] == field[2][1] && field[2][1] == field[2][2] && field[2][2]) return false;
+		if (field[0][0] == field[1][0] && field[1][0] == field[2][0] && field[2][0]) return false;
+		if (field[0][1] == field[1][2] && field[1][2] == field[2][2] && field[2][2]) return false;
+		if (field[0][2] == field[1][2] && field[1][2] == field[2][2] && field[2][2]) return false;
+		if (field[0][0] == field[1][1] && field[1][1] == field[2][2] && field[2][2]) return false;
+		if (field[0][2] == field[1][1] && field[1][1] == field[2][0] && field[2][0]) return false;
 		return true;
 	}
 
@@ -319,6 +326,24 @@ TEST(notEndTest, Test1) {
 	P.field[2][0] = 0;
 	P.field[2][1] = 2;
 	P.field[2][2] = 0;
+
+	ASSERT_EQ(0, P.notEndCycle());
+}
+
+TEST(notEndTest, Test4) {
+	XO P;
+	//O X X
+	//  O  
+	//X   O
+	P.field[0][0] = 2;
+	P.field[0][1] = 1;
+	P.field[0][2] = 1;
+	P.field[1][0] = 0;
+	P.field[1][1] = 2;
+	P.field[1][2] = 0;
+	P.field[2][0] = 1;
+	P.field[2][1] = 0;
+	P.field[2][2] = 2;
 
 	ASSERT_EQ(0, P.notEndCycle());
 }
