@@ -49,6 +49,7 @@ public:
 	//проверка, достаточно ли крестиков-ноликов для ввода кода. 0 - хватит, 1 - надо еще
 	//+
 	bool notEndCycle() {
+		if (code.size() == 9) return false;
 		return true;
 	}
 
@@ -273,6 +274,34 @@ TEST(notEndTest, Test3) {
 	P.field[2][2] = 0;
 
 	ASSERT_EQ(true, P.notEndCycle());
+}
+
+TEST(notEndTest, Test2) {
+	XO P;
+	//X O X
+	//X O O
+	//O X X
+	P.code.push_back(1);
+	P.code.push_back(2);
+	P.code.push_back(1);
+	P.code.push_back(1);
+	P.code.push_back(2);
+	P.code.push_back(2);
+	P.code.push_back(2);
+	P.code.push_back(1);
+	P.code.push_back(1);
+
+	P.field[0][0] = 1;
+	P.field[0][1] = 2;
+	P.field[0][2] = 1;
+	P.field[1][0] = 1;
+	P.field[1][1] = 2;
+	P.field[1][2] = 2;
+	P.field[2][0] = 2;
+	P.field[2][1] = 1;
+	P.field[2][2] = 1;
+
+	ASSERT_EQ(false, P.notEndCycle());
 }
 
 int _tmain(int argc, _TCHAR* argv[]){
