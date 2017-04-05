@@ -40,6 +40,9 @@ public:
 	int getHoriz(int n) { return (n - 1) % 3; }
 
 	bool isCorrectPlace(int u) {
+		int v = getVert(u);
+		int h = getHoriz(u);
+		if (field[v][h] == 2) return 0;
 		return 1;
 	}
 
@@ -234,6 +237,12 @@ TEST(getHorizTest, Test3) {
 TEST(isCorrectPlaceTest, Test1) {
 	XO P;
 	ASSERT_TRUE(P.isCorrectPlace(1));
+}
+
+TEST(isCorrectPlaceTest, Test2) {
+	XO P;
+	P.field[P.getVert(3)][P.getHoriz(3)] = 2;
+	ASSERT_FALSE(P.isCorrectPlace(3));
 }
 
 int _tmain(int argc, _TCHAR* argv[]){
