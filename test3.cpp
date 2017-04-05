@@ -41,6 +41,13 @@ public:
 
 	bool isCorrectCode() {
 		if (field[0][0] == field[0][1] && field[0][1] == field[0][2] && field[0][2] == 1) return true;
+		if (field[1][0] == field[1][1] && field[1][1] == field[1][2] && field[1][2] == 1) return true;
+		if (field[2][0] == field[2][1] && field[2][1] == field[2][2] && field[2][2] == 1) return true;
+		if (field[0][0] == field[1][0] && field[1][0] == field[2][0] && field[2][0] == 1) return true;
+		if (field[0][1] == field[1][2] && field[1][2] == field[2][2] && field[2][2] == 1) return true;
+		if (field[0][2] == field[1][2] && field[1][2] == field[2][2] && field[2][2] == 1) return true;
+		if (field[0][0] == field[1][1] && field[1][1] == field[2][2] && field[2][2] == 1) return true;
+		if (field[0][2] == field[1][1] && field[1][1] == field[2][0] && field[2][0] == 1) return true;
 		return false;
 	}
 
@@ -372,6 +379,17 @@ TEST(isCorrectCodeTest, Test2) {
 	P.field[0][0] = P.field[0][1] = P.field[0][2] = 1;
 	P.field[1][0] = P.field[2][1] = P.field[2][2] = 0;
 	P.field[2][0] = P.field[2][2] = P.field[1][1] = 2;
+	ASSERT_TRUE(P.isCorrectCode());
+}
+
+TEST(isCorrectCodeTest, Test3) {
+	XO P;
+	//X   O
+	//  X
+	//O   X
+	P.field[0][0] = P.field[1][1] = P.field[2][2] = 1;
+	P.field[1][0] = P.field[0][1] = P.field[1][2] = P.field[2][1] = 0;
+	P.field[2][0] = P.field[0][2] = 2;
 	ASSERT_TRUE(P.isCorrectCode());
 }
 
