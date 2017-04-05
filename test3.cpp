@@ -46,6 +46,12 @@ public:
 		return 1;
 	}
 
+	//проверка, достаточно ли крестиков-ноликов для ввода кода. 0 - хватит, 1 - надо еще
+	//+
+	bool notEndCycle() {
+		return true;
+	}
+
 	bool readPasswFile(string s) {
 		bool f1 = true, f2 = true;
 		try {
@@ -249,6 +255,24 @@ TEST(isCorrectPlaceTest, Test3) {
 	XO P;
 	P.field[P.getVert(5)][P.getHoriz(5)] = 1;
 	ASSERT_FALSE(P.isCorrectPlace(5));
+}
+
+TEST(notEndTest, Test3) {
+	XO P;
+	//O X X
+	//
+	//
+	P.field[0][0] = 2;
+	P.field[0][1] = 1;
+	P.field[0][2] = 1;
+	P.field[1][0] = 0;
+	P.field[1][1] = 0;
+	P.field[1][2] = 0;
+	P.field[2][0] = 0;
+	P.field[2][1] = 0;
+	P.field[2][2] = 0;
+
+	ASSERT_EQ(true, P.notEndCycle());
 }
 
 int _tmain(int argc, _TCHAR* argv[]){
