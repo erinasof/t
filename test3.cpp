@@ -37,7 +37,7 @@ public:
 	//+
 	int getVert(int n) { return (n - 1) / 3; }
 	//горизонтальная координата из номера
-	int getHoriz(int n) { if (n == 1) return 0; else return 2; }
+	int getHoriz(int n) { return (n - 1) % 3; }
 
 	bool readPasswFile(string s) {
 		bool f1 = true, f2 = true;
@@ -221,6 +221,12 @@ TEST(getHorizTest, Test2) {
 	XO P;
 	ASSERT_EQ(2, P.getHoriz(6));
 }
+
+TEST(getHorizTest, Test3) {
+	XO P;
+	ASSERT_EQ(2, P.getHoriz(9));
+}
+
 
 int _tmain(int argc, _TCHAR* argv[]){
 	::testing::InitGoogleTest(&argc, argv);
