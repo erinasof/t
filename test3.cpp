@@ -28,6 +28,7 @@ public:
 			field[i] = new int[3];
 		
 		field[0][0] = 0;
+		field[1][0] = 0;
 	}
 
 	bool readPasswFile(string s) {
@@ -176,6 +177,11 @@ TEST(readListFileTest, Test3) {
 TEST(XOTest, Test1) {
 	XO P;
 	ASSERT_FALSE(P.field[0][0]);
+}
+
+TEST(XOTest, Test2) {
+	XO P;
+	ASSERT_FALSE(P.field[1][0]);
 }
 
 int _tmain(int argc, _TCHAR* argv[]){
