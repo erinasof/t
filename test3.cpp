@@ -35,7 +35,7 @@ public:
 
 	//вертикальная координата из номера
 	//+
-	int getVert(int n) { if (n == 1) return 0; else return 1; }
+	int getVert(int n) { return (n - 1) / 3; }
 
 	bool readPasswFile(string s) {
 		bool f1 = true, f2 = true;
@@ -203,6 +203,11 @@ TEST(getVertTest, Test1) {
 TEST(getVertTest, Test2) {
 	XO P;
 	ASSERT_EQ(1, P.getVert(6));
+}
+
+TEST(getVertTest, Test3) {
+	XO P;
+	ASSERT_EQ(0, P.getVert(2));
 }
 
 int _tmain(int argc, _TCHAR* argv[]){
