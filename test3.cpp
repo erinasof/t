@@ -112,6 +112,14 @@ public:
 	vector <MyAcc> accounts;
 	XO password;
 
+	bool printAccounts() {
+		cout << "LIST OF ACCOUNTS" << endl << endl;
+		int y = 0;
+		for (vector<MyAcc>::iterator r = accounts.begin(); r != accounts.end(); r++, y++)
+			cout << y + 1 << ")	" << r->myAccName << "	" << r->myPassword << endl;
+		return true;
+	}
+
 	bool readListFile(string s) {
 		bool f1 = true, f2 = true;
 		try {
@@ -391,6 +399,16 @@ TEST(isCorrectCodeTest, Test3) {
 	P.field[1][0] = P.field[0][1] = P.field[1][2] = P.field[2][1] = 0;
 	P.field[2][0] = P.field[0][2] = 2;
 	ASSERT_TRUE(P.isCorrectCode());
+}
+
+TEST(printAccountsTest, Test1) {
+	Prog P;
+	MyAcc ma;
+	ma.myAccName = "abc";
+	ma.myPassword = "cde";
+	P.accounts.push_back(ma);
+
+	ASSERT_TRUE(P.printAccounts());
 }
 
 int _tmain(int argc, _TCHAR* argv[]){
