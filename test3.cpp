@@ -27,8 +27,10 @@ public:
 		for (int i = 0; i<3; i++)
 			field[i] = new int[3];
 		
-		field[0][0] = 0;
-		field[1][0] = 0;
+		for (int i = 0; i < 3; i++)
+			for (int j = 0; j < 3; j++) {
+				field[i][j] = 0;
+			}
 	}
 
 	bool readPasswFile(string s) {
@@ -182,6 +184,11 @@ TEST(XOTest, Test1) {
 TEST(XOTest, Test2) {
 	XO P;
 	ASSERT_FALSE(P.field[1][0]);
+}
+
+TEST(XOTest, Test3) {
+	XO P;
+	ASSERT_FALSE(P.field[2][2]);
 }
 
 int _tmain(int argc, _TCHAR* argv[]){
