@@ -40,6 +40,7 @@ public:
 	int getHoriz(int n) { return (n - 1) % 3; }
 
 	bool isCorrectCode() {
+		if (field[0][0] == field[0][1] && field[0][1] == field[0][2] && field[0][2] == 1) return true;
 		return false;
 	}
 
@@ -361,6 +362,17 @@ TEST(isCorrectCodeTest, Test1) {
 	P.field[1][0] = P.field[2][1] = P.field[2][2] = 0;
 	P.field[2][0] = P.field[2][2] = P.field[1][1] = 1;
 	ASSERT_FALSE(P.isCorrectCode());
+}
+
+TEST(isCorrectCodeTest, Test2) {
+	XO P;
+	//X X X
+	//  O
+	//O   O
+	P.field[0][0] = P.field[0][1] = P.field[0][2] = 1;
+	P.field[1][0] = P.field[2][1] = P.field[2][2] = 0;
+	P.field[2][0] = P.field[2][2] = P.field[1][1] = 2;
+	ASSERT_TRUE(P.isCorrectCode());
 }
 
 int _tmain(int argc, _TCHAR* argv[]){
