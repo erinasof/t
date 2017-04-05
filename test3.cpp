@@ -39,6 +39,10 @@ public:
 	//горизонтальная координата из номера
 	int getHoriz(int n) { return (n - 1) % 3; }
 
+	bool isCorrectPlace(int u) {
+		return 1;
+	}
+
 	bool readPasswFile(string s) {
 		bool f1 = true, f2 = true;
 		try {
@@ -227,6 +231,10 @@ TEST(getHorizTest, Test3) {
 	ASSERT_EQ(2, P.getHoriz(9));
 }
 
+TEST(isCorrectPlaceTest, Test1) {
+	XO P;
+	ASSERT_TRUE(P.isCorrectPlace(1));
+}
 
 int _tmain(int argc, _TCHAR* argv[]){
 	::testing::InitGoogleTest(&argc, argv);
