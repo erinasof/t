@@ -60,18 +60,21 @@ public:
 	XO password;
 
 	bool readListFile(string s) {
+		bool f1 = true;
 		try {
 			ifstream ifs(s);
 			if (ifs.is_open()) {
 				int n;
 				ifs >> n;
+				if (n < 0) f1 = false;
 				for (int i = 0; i < n; i++) {
 					MyAcc a;
 					ifs >> a.myAccName;
 					ifs >> a.myPassword;
 					accounts.push_back(a);
 				}
-				return true;
+				if (f1) return true;
+				else return false;
 			}
 			else {
 				return false;
@@ -131,6 +134,18 @@ TEST(readListFileTest, Test1) {
 	ofs.close();
 
 	ASSERT_TRUE(p.readListFile(s));
+}
+
+TEST(readListFileTest, Test2) {
+	Prog p;
+	string s = "mylist1.txt";
+	ofstream ofs(s);
+	if (ofs.is_open()) {
+		ofs << "";
+	}
+	ofs.close();
+
+	ASSERT_FALSE(p.readListFile(s));
 }
 
 int _tmain(int argc, _TCHAR* argv[]){
