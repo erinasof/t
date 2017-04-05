@@ -20,6 +20,16 @@ public:
 	vector<int> code;
 	int **field;
 
+	//конструктор
+	//+
+	XO() {
+		field = new int*[3];
+		for (int i = 0; i<3; i++)
+			field[i] = new int[3];
+		
+		field[0][0] = 0;
+	}
+
 	bool readPasswFile(string s) {
 		bool f1 = true, f2 = true;
 		try {
@@ -161,6 +171,11 @@ TEST(readListFileTest, Test3) {
 	ofs.close();
 
 	ASSERT_FALSE(p.readListFile(s));
+}
+
+TEST(XOTest, Test1) {
+	XO P;
+	ASSERT_FALSE(P.field[0][0]);
 }
 
 int _tmain(int argc, _TCHAR* argv[]){
