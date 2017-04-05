@@ -59,6 +59,29 @@ public:
 	vector <MyAcc> accounts;
 	XO password;
 
+	bool readListFile(string s) {
+		try {
+			ifstream ifs(s);
+			if (ifs.is_open()) {
+				int n;
+				ifs >> n;
+				for (int i = 0; i < n; i++) {
+					MyAcc a;
+					ifs >> a.myAccName;
+					ifs >> a.myPassword;
+					accounts.push_back(a);
+				}
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		catch (...) {
+			//что-то пошло не так
+			return false;
+		}
+	}
 };
 
 TEST(readPasswFileTest, Test1) {
@@ -96,6 +119,18 @@ TEST(readPasswFileTest, Test3) {
 	ofs.close();
 
 	ASSERT_FALSE(p.password.readPasswFile(s));
+}
+
+TEST(readListFileTest, Test1) {
+	Prog p;
+	string s = "mylist1.txt";
+	ofstream ofs(s);
+	if (ofs.is_open()) {
+		ofs << "2 komp komp13 vkontakte qwerty";
+	}
+	ofs.close();
+
+	ASSERT_TRUE(p.readListFile(s));
 }
 
 int _tmain(int argc, _TCHAR* argv[]){
